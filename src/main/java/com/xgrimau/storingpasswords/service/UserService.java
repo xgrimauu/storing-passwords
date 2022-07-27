@@ -24,7 +24,6 @@ public class UserService {
         user.setUsername(username);
         user.setHashedPassword(hashPassword(password));
         userRepository.save(user);
-
     }
 
     @SneakyThrows
@@ -33,6 +32,7 @@ public class UserService {
         byte[] salt = new byte[16];
         random.nextBytes(salt);
         KeySpec spec = new PBEKeySpec(password.toCharArray(), salt, 65536, 128);
+
         SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
         return Base64.getEncoder().encodeToString(factory.generateSecret(spec).getEncoded());
     }
