@@ -17,4 +17,9 @@ public class UserController {
     public void registerUser(@RequestBody NewUserRequest userRequest) {
         userService.registerUser(userRequest.username, userRequest.password);
     }
+
+    @PostMapping("/login")
+    public boolean authenticate(@RequestBody LoginRequest loginRequest) {
+        return userService.isValidUser(loginRequest.username, loginRequest.password);
+    }
 }
